@@ -1,0 +1,36 @@
+{
+  "name": "gymshark-discounts",
+  "version": "1.0.0",
+  "description": "A Discord Bot that sends every discount coming from the official Gymshark website.",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node bot.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michelmnds/gymshark-discounts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michelmnds/gymshark-discounts/issues"
+  },
+  "homepage": "https://github.com/michelmnds/gymshark-discounts#readme",
+  "devDependencies": {
+    "@types/imapflow": "^1.0.19",
+    "@types/mailparser": "^3.4.5",
+    "@types/node": "^22.10.4",
+    "@types/nodemailer": "^6.4.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "discord.js": "^14.17.2",
+    "dotenv": "^16.4.7",
+    "imapflow": "^1.0.171",
+    "mailparser": "^3.7.2",
+    "nodemailer": "^6.9.16"
+  }
+}
