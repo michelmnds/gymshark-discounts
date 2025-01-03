@@ -4,7 +4,9 @@
   "description": "A Discord Bot that sends every discount coming from the official Gymshark website.",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node bot.ts"
+    "start": "ts-node bot.ts",
+    "build": "tsc",
+    "dev": "ts-node bot.ts"
   },
   "repository": {
     "type": "git",
@@ -34,3 +36,4 @@
     "nodemailer": "^6.9.16"
   }
 }
+
