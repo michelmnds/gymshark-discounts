@@ -14,7 +14,7 @@ import express from "express";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 interface Environment {
   DISCORD_TOKEN: string;
