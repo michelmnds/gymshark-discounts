@@ -168,6 +168,18 @@ class GymsharkDiscountsBot {
       await this.emailClient.mailboxOpen("INBOX");
 
       await this.checkNewEmails();
+
+      // Configura o monitoramento contínuo
+      this.emailClient.on("exists", async () => {
+        console.log("Novo email detectado!");
+        await this.checkNewEmails();
+      });
+
+      // Reconecta se a conexão cair
+      this.emailClient.on("close", async () => {
+        console.log("Conexão perdida com o email. Reconectando...");
+        await this.watchEmails();
+      });
     } catch (error) {
       console.error("Erro ao monitorar emails:", error);
     }
@@ -227,12 +239,22 @@ class GymsharkDiscountsBot {
     }
   }
 
+  // Intervalo regular de verificação como backup, caso o evento 'exists' não seja disparado
+  private setupEmailPolling() {
+    // Verifica a cada 5 minutos
+    setInterval(() => {
+      console.log("Verificação periódica de emails...");
+      this.checkNewEmails().catch(console.error);
+    }, 5 * 60 * 1000);
+  }
+
   async start() {
     try {
       this.setupServer();
       this.client.once(Events.ClientReady, () => {
         console.log("Bot Gymshark está online!");
         this.watchEmails().catch(console.error);
+        this.setupEmailPolling(); // Adiciona a verificação periódica
       });
 
       await this.client.login(process.env.DISCORD_TOKEN);
