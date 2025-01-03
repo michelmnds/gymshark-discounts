@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/michelmnds/gymshark-discounts#readme",
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/imapflow": "^1.0.19",
     "@types/mailparser": "^3.4.5",
     "@types/node": "^22.10.4",
@@ -31,9 +32,9 @@
     "cheerio": "^1.0.0",
     "discord.js": "^14.17.2",
     "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "imapflow": "^1.0.171",
     "mailparser": "^3.7.2",
     "nodemailer": "^6.9.16"
   }
 }
-

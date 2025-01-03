@@ -9,8 +9,12 @@ import { ImapFlow } from "imapflow";
 import { simpleParser } from "mailparser";
 import dotenv from "dotenv";
 import { load } from "cheerio";
+import express from "express";
 
 dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 interface Environment {
   DISCORD_TOKEN: string;
@@ -47,6 +51,16 @@ class GymsharkDiscountsBot {
     });
 
     this.notificationChannelId = env.NOTIFICATION_CHANNEL_ID;
+  }
+
+  private setupServer() {
+    app.get("/", (req, res) => {
+      res.send("Bot is running!");
+    });
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   }
 
   private isGymsharkPromoEmail(from: string, subject: string): boolean {
@@ -215,6 +229,7 @@ class GymsharkDiscountsBot {
 
   async start() {
     try {
+      this.setupServer();
       this.client.once(Events.ClientReady, () => {
         console.log("Bot Gymshark está online!");
         this.watchEmails().catch(console.error);
