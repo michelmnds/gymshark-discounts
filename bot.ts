@@ -17,6 +17,7 @@ interface Environment {
   EMAIL_USER: string;
   EMAIL_PASSWORD: string;
   NOTIFICATION_CHANNEL_ID: string;
+  SEEN: string;
 }
 
 class GymsharkDiscountsBot {
@@ -163,7 +164,7 @@ class GymsharkDiscountsBot {
       await this.emailClient.mailboxOpen("INBOX");
       const searchResults = await this.emailClient.search({
         from: "hello@e.gymshark.com",
-        seen: false,
+        seen: process.env.SEEN === "true",
       });
 
       for (const uid of searchResults) {
@@ -233,12 +234,14 @@ async function main() {
     EMAIL_USER: process.env.EMAIL_USER!,
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD!,
     NOTIFICATION_CHANNEL_ID: process.env.NOTIFICATION_CHANNEL_ID!,
+    SEEN: process.env.SEEN!,
   };
 
   if (
     !env.DISCORD_TOKEN ||
     !env.EMAIL_USER ||
     !env.EMAIL_PASSWORD ||
+    !env.SEEN ||
     !env.NOTIFICATION_CHANNEL_ID
   ) {
     throw new Error("Faltam variáveis de ambiente necessárias");
